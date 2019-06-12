@@ -1,2 +1,2 @@
-# transformers-server-in-house
-Transformers server for purposes of the In-House front-end assignment.
+# transformers-server
+Transformers server simulation for In-House, built in node.

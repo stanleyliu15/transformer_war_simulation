@@ -1,0 +1,532 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "description": "This is the Transformers back-end server for purposes of the LimeSpot front-end assignment.",
+      "version": "1.0.0",
+      "title": "Teletran-1 API",
+      "termsOfService": "http://transformers.morethanmeetsthe.io/",
+      "contact": {
+        "email": "optimus@theark.com"
+      },
+      "license": {
+        "name": "Apache 2.0",
+        "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+      }
+    },
+    "host": "localhost:3456",
+    "basePath": "",
+    "tags": [
+      {
+        "name": "transformer",
+        "description": "Transformers and specifications",
+        "externalDocs": {
+          "description": "Find out more about the Transformers",
+          "url": "http://tfwiki.net"
+        }
+      },
+      {
+        "name": "war",
+        "description": "Simulation of a war between transformers",
+        "externalDocs": {
+            "description": "Find out more about 'The Great War'",
+            "url": "https://tfwiki.net/wiki/Great_War_(G1)"
+          }
+      }
+    ],
+    "schemes": [
+      "http"
+    ],
+    "paths": {
+      "/transformers": {
+        "get": {
+          "tags": [
+            "transformer"
+          ],
+          "summary": "Gets all Transformers",
+          "description": "Gets all Transformers in the database (or by name search).  No sorting is applied.",
+          "operationId": "getTransformers",
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "in": "query",
+              "name": "name",
+              "description": "Transformer name (can be a substring...searches in the form of '%{name}%'.  Case insensitive.",
+              "required": false,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "successful operation",
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/Transformer"
+                }
+              }
+            }
+          }
+        },
+        "post": {
+          "tags": [
+            "transformer"
+          ],
+          "summary": "Add a new transformer to Teletran-1s archives",
+          "description": "Adds a new transformer to Teletran-1s archives.",
+          "operationId": "addTransformer",
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "in": "body",
+              "name": "transformer",
+              "description": "Transformer specification for adding a new Transformer to Teletran's archives.",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/TransformerCreateUpdateModel"
+              }
+            }
+          ],
+          "responses": {
+            "405": {
+              "description": "Invalid input"
+            }
+          }
+        }
+      },
+      "/transformers/{id}": {
+        "get": {
+          "tags": [
+            "transformer"
+          ],
+          "summary": "Gets a Transformer by ID",
+          "description": "Gets a Transformer corresponding to the ID passed in.",
+          "operationId": "getTransformerByID",
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "in": "path",
+              "name": "id",
+              "description": "ID of the Transformer in question",
+              "required": true,
+              "type": "integer"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "successful operation",
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/Transformer"
+                }
+              }
+            }
+          }
+        },
+        "put": {
+          "tags": [
+            "transformer"
+          ],
+          "summary": "Update an existing transformer",
+          "description": "Ultra-cool note: the example PUT provided below adjusts Scorponok's stats to the original printed Tech Spec and not the corrected version implied by the readout from the Headmaster display on the chest of the toy.",
+          "operationId": "updateTransformer",
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "in": "body",
+              "name": "body",
+              "description": "Existing Transformer object for editing",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/Transformer"
+              }
+            },
+            {
+              "in": "path",
+              "name": "id",
+              "description": "ID of the Transformer in question",
+              "required": true,
+              "type": "integer"
+            }
+          ],
+          "responses": {
+            "400": {
+              "description": "Invalid ID supplied"
+            },
+            "404": {
+              "description": "Transformer not found"
+            },
+            "200": {
+              "description": "successful operation",
+              "schema": {
+                "$ref": "#/definitions/Transformer"
+              }
+            }
+          }
+        },
+        "delete": {
+          "tags": [
+            "transformer"
+          ],
+          "summary": "Delete an existing transformer",
+          "description": "This deletes a Transformer from the database.",
+          "operationId": "deleteTransformer",
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "in": "path",
+              "name": "id",
+              "description": "ID of the Transformer in question",
+              "required": true,
+              "type": "integer"
+            }
+          ],
+          "responses": {
+            "400": {
+              "description": "Invalid ID supplied"
+            },
+            "404": {
+              "description": "Transformer not found"
+            },
+            "200": {
+              "description": "successful operation",
+              "schema": {
+                "$ref": "#/definitions/Transformer"
+              }
+            }
+          }
+        }
+      },
+      "/transformers/allegiance/autobot": {
+        "get": {
+          "tags": [
+            "transformer"
+          ],
+          "summary": "Gets all Transformers with Autobot allegiance.",
+          "description": "Gets all Autobots.  No sorting is applied.",
+          "operationId": "getAutobots",
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+          ],
+          "responses": {
+            "200": {
+              "description": "successful operation",
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/Transformer"
+                }
+              }
+            }
+          }
+        }
+      },
+      "/transformers/allegiance/decepticon": {
+        "get": {
+          "tags": [
+            "transformer"
+          ],
+          "summary": "Gets all Transformers with Decepticon allegiance.",
+          "description": "Gets all Decepticons.  No sorting is applied.",
+          "operationId": "getDecepticons",
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+          ],
+          "responses": {
+            "200": {
+              "description": "successful operation",
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/Transformer"
+                }
+              }
+            }
+          }
+        }
+      },
+      "/war": {
+        "get": {
+          "tags": [
+            "war"
+          ],
+          "summary": "Runs a war simulation with the Autobots and Decepticons currently stored in Teletran's archives.",
+          "description": "Both sides are sorted by rank.",
+          "operationId": "war",
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+          ],
+          "responses": {
+            "200": {
+              "description": "successful operation",
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/War"
+                }
+              }
+            }
+          }
+        }
+      },
+      "/war/randomize": {
+        "get": {
+          "tags": [
+            "war"
+          ],
+          "summary": "Runs a war simulation with the Autobots and Decepticons currently stored in Teletran's archives.",
+          "description": "Both sides are randomized in battle.",
+          "operationId": "warRandomize",
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+          ],
+          "responses": {
+            "200": {
+              "description": "successful operation",
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/War"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "definitions": {
+        "TransformerCreateUpdateModel" : {
+            "properties": {
+                "allegiance": {
+                    "type": "string",
+                    "description": "Allegiance",
+                    "enum": ["Autobot","Decepticon"],
+                    "example": "Decepticon"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Name",
+                    "example": "Jness Maximus"
+                },
+                "strength": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 10,
+                    "example": 10
+                },
+                "intelligence": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 10,
+                    "example": 10
+                },
+                "speed": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 10,
+                    "example": 10
+                },
+                "endurance": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 10,
+                    "example": 10
+                },
+                "rank": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 10,
+                    "example": 10
+                },
+                "courage": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 10,
+                    "example": 10
+                },
+                "firepower": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 10,
+                    "example": 10
+                },
+                "skill": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 10,
+                    "example": 10
+                }
+            }
+        },
+        "BattleResult": {
+          "properties": {
+            "victor": {
+              "$ref": "#/definitions/Transformer"
+            },
+            "loser": {
+              "$ref": "#/definitions/Transformer"
+            },
+            "rationale": {
+              "type": "string",
+              "example": "skill"
+            },
+            "description": {
+              "type": "string",
+              "example": "Point Blank's skill was higher than Misfire."
+            }
+          }
+        },
+        "War": {
+          "properties": {
+            "winningAllegiance": {
+              "type": "string",
+              "example": "Decepticon"
+            },
+            "victors": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Transformer"
+              }
+            },
+            "survivors": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Transformer"
+              }
+            },
+            "battleResults": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/BattleResult"
+              }
+            },
+            "code": {
+              "type": "string",
+              "example": "decepticon"
+            },
+            "friendlyDescription": {
+              "type": "string",
+              "example": "The Decepticons were victorious!"
+            }
+          }
+        },
+        "Transformer" : {
+          "properties": {
+              "allegiance": {
+                  "type": "string",
+                  "description": "Allegiance",
+                  "enum": ["Autobot","Decepticon"],
+                  "example": "Decepticon"
+              },
+              "id": {
+                "type": "integer",
+                "minimum": 1,
+                "example": 9
+              },
+              "name": {
+                  "type": "string",
+                  "description": "Name",
+                  "example": "Scorponok"
+              },
+              "strength": {
+                  "type": "integer",
+                  "description": "Strength",
+                  "minimum": 1,
+                  "maximum": 10,
+                  "example": 8
+              },
+              "intelligence": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 10,
+                  "example": 7
+              },
+              "speed": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 10,
+                  "example": 2
+              },
+              "endurance": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 10,
+                  "example": 8
+              },
+              "rank": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 10,
+                  "example": 8
+              },
+              "courage": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 10,
+                  "example": 8
+              },
+              "firepower": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 10,
+                  "example": 7
+              },
+              "skill": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 10,
+                  "example": 7
+              }
+          }
+      }
+    },
+    "externalDocs": {
+      "description": "Find out more about Swagger",
+      "url": "http://swagger.io"
+    }
+  }

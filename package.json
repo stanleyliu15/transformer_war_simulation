@@ -1,0 +1,45 @@
+{
+  "name": "transformers-server",
+  "version": "1.0.0",
+  "description": "Transformers Server for purposes of the In-House front-end assignment.",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "start": "npm run compile && node dist/start-server.js",
+    "pretty": "prettier --single-quote --write \"{src,test}/**/*.js\"",
+    "compile": "npm run pretty && ./node_modules/.bin/babel src --out-dir dist"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/justicegray/transformers-server.git"
+  },
+  "keywords": [
+    "transformers",
+    "in-house"
+  ],
+  "author": "Justice Gray",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/justicegray/transformers-server/issues"
+  },
+  "homepage": "https://github.com/justicegray/transformers-server#readme",
+  "dependencies": {
+    "@babel/polyfill": "^7.4.4",
+    "core-js": "^3.1.3",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "sequelize": "^5.8.6",
+    "shuffle-array": "^1.0.1",
+    "sqlite": "^3.0.3",
+    "swagger-ui-express": "^4.0.5",
+    "v8n": "^1.3.2"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.4.4",
+    "@babel/core": "^7.4.5",
+    "@babel/preset-env": "^7.4.5",
+    "eslint": "^5.16.0",
+    "jest": "^24.8.0",
+    "prettier": "^1.17.1"
+  }
+}
