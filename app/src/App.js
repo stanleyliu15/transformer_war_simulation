@@ -12,8 +12,8 @@ function App() {
     <Router>
       <Switch>
         <Route path="/" exact component={Home} />
-        <Route path="/create/" exact component={TransformerCreate} />
-        <Route path="/profile/:id/" exact component={TransformerProfile} />
+        <Route path="/transformers/create/" exact component={TransformerCreate} />
+        <Route path="/transformers/profile/:id/" exact component={TransformerProfile} />
         <Route path="/war/:type?" exact component={WarSimulation} />
         <Route component={PageNotFound} />
       </Switch>
