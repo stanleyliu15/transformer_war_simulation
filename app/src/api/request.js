@@ -1,7 +1,11 @@
 import { serverUrl } from '../constants';
 
 const buildRequestParams = (method, body) => {
-  const params = {};
+  const params = {
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  };
 
   if (method) {
     params.method = method;
