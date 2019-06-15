@@ -7,5 +7,5 @@ export default {
   getDecepticons: () => request('/transformers/allegiance/decepticon', 'get'),
   postTransformer: transformer => request('/transformers', 'post', transformer),
   putTransformer: (id, transformer) => request(`/transformers/${id}`, 'put', transformer),
-  deleteTransformers: id => request(`/transformers/${id}`, 'delete')
+  deleteTransformer: id => request(`/transformers/${id}`, 'delete')
 };
