@@ -1,9 +1,10 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const NavigationBar = () => (
   <nav>
-    <a href="/war">War</a>
-    <a href="/transformers/create">Create</a>
+    <Link to="/war">War</Link>
+    <Link to="/transformers/create">Create</Link>
   </nav>
 );
 

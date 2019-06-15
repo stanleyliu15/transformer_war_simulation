@@ -1,9 +1,10 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Header = () => (
   <header>
     <h1>
-      <a href="/">Transformers War Simulation</a>
+      <Link to="/">Transformers War Simulation</Link>
     </h1>
   </header>
 );

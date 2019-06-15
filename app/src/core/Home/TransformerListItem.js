@@ -1,14 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 const TransformerListItem = ({ id, name, rating }) => (
   <li>
-    <a href={`transformers/profile/${id}`}>
+    <Link to={`transformers/profile/${id}`}>
       <div>
         <h4>{name}</h4>
         <h6>{`Rating: ${rating}`}</h6>
       </div>
-    </a>
+    </Link>
   </li>
 );
 
