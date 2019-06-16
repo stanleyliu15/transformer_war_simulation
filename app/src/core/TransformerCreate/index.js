@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 
 import { allegiances } from '../../constants';
 import { Header, TransformerStatSliderField } from '../../components';
@@ -54,12 +55,15 @@ class TransformerCreate extends Component {
     const { inputs } = this.state;
     const { name: nameInput, allegiance: allegianceInput, ...transformerStatInputs } = inputs;
 
+    if (created) {
+      return <Redirect to="/" />;
+    }
+
     return (
       <div>
         <Header />
         <h2>Build a Transformer</h2>
         {error && <div>Error: {error.message}</div>}
-        {created ? <div>Successfully Created!</div> : null}
         <form onSubmit={handleCreate}>
           {``}
           <label htmlFor="name">Name</label>
