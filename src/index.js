@@ -14,7 +14,7 @@ export default function startTransformersServer({ httpPort }) {
   app.use(
     cors({
       origin: '*',
-      methods: 'GET,POST,OPTIONS,DELETE',
+      methods: 'GET,POST,PUT,OPTIONS,DELETE',
       preflightContinue: false
     })
   );

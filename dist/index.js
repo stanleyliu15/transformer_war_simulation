@@ -32,7 +32,7 @@ function startTransformersServer(_ref) {
   let app = (0, _express.default)();
   app.use(cors({
     origin: '*',
-    methods: 'GET,POST,OPTIONS,DELETE',
+    methods: 'GET,POST,PUT,OPTIONS,DELETE',
     preflightContinue: false
   }));
 
