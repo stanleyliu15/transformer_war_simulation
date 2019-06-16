@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 
 import { allegiances } from '../../constants';
-import { Header } from '../../components';
-import TransformerStatSliderField from './TransformerStatSliderField';
+import { Header, TransformerStatSliderField } from '../../components';
 import TransformerAPI from '../../api/TransformerAPI';
 
 class TransformerCreate extends Component {
@@ -10,22 +9,27 @@ class TransformerCreate extends Component {
     inputs: {
       name: '',
       allegiance: allegiances[0],
-      strength: '5',
-      intelligence: '5',
-      speed: '5',
-      endurance: '5',
-      rank: '5',
-      courage: '5',
-      firepower: '5',
-      skill: '5'
+      strength: 5,
+      intelligence: 5,
+      speed: 5,
+      endurance: 5,
+      rank: 5,
+      courage: 5,
+      firepower: 5,
+      skill: 5
     },
     created: false,
     error: null
   };
 
   onInputChange = event => {
-    const { name: inputName, value: inputValue } = event.target;
+    const { name: inputName } = event.target;
+    let { value: inputValue } = event.target;
     const { inputs } = this.state;
+
+    if (!isNaN(inputValue) && typeof inputValue === 'string' && inputValue.trim() !== '') {
+      inputValue = +inputValue;
+    }
 
     this.setState({
       inputs: { ...inputs, [inputName]: inputValue }
