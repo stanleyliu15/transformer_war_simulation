@@ -25,7 +25,10 @@ const request = (endpoint, method, body) =>
         return null;
       }
 
-      return response.json();
+      return response
+        .json()
+        .then()
+        .catch(_ => null);
     }
 
     if (process.env.NODE_ENV === 'development') {
