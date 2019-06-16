@@ -13,7 +13,7 @@ const TransformerStatSliderField = ({ name, value, onChange }) => (
 
 TransformerStatSliderField.propTypes = {
   name: PropTypes.string.isRequired,
-  value: PropTypes.string.isRequired,
+  value: PropTypes.number.isRequired,
   onChange: PropTypes.func.isRequired
 };
 
