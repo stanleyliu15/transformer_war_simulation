@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 
-import styles from './styles/Home.module.css';
 import TransformerAPI from '../../api/TransformerAPI';
 import { Header, ErrorMessage } from '../../components';
 import NavigationBar from './NavigationBar';
-import ContentLayout from './ContentLayout';
 import TransformerView from './TransformerView';
 import sortObjectArrayAlphabetical from '../../util/sortObjectArrayAlphabetical';
 
@@ -49,14 +47,12 @@ class Home extends Component {
         <Header />
         <NavigationBar />
         <main>
-          <ContentLayout>
-            {error && <ErrorMessage message={error.message} />}
-            {isLoading ? (
-              <div>Loading...</div>
-            ) : (
-              <TransformerView autobots={autobots} decepticons={decepticons} />
-            )}
-          </ContentLayout>
+          {error && <ErrorMessage message={error.message} />}
+          {isLoading ? (
+            <div>Loading...</div>
+          ) : (
+            <TransformerView autobots={autobots} decepticons={decepticons} />
+          )}
         </main>
       </div>
     );

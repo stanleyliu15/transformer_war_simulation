@@ -1,0 +1,36 @@
+.transformer_list_container {
+  text-align: center;
+}
+
+.transformer_list_allegiance_logo {
+  width: 60px;
+  height: auto;
+  margin-bottom: 1rem;
+}
+
+.transformer_item_wrapper {
+  margin-bottom: 1rem;
+}
+
+.transformer_item_wrapper {
+  border: 1px solid grey;
+  border-radius: 4px;
+}
+
+.transformer_item_wrapper:hover {
+  background-color: whitesmoke;
+}
+
+.transformer_item {
+  display: block;
+  padding: 1rem;
+  color: black;
+}
+
+.transformer_item:active {
+  color: red;
+}
+
+.transformer_item_name {
+  margin-bottom: 0.4rem;
+}

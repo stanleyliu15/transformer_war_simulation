@@ -1,0 +1,10 @@
+.transformer_view_container {
+  display: flex;
+}
+
+.transformer_list_wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
