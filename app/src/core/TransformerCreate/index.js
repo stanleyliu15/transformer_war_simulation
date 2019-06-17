@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 
 import { allegiances } from '../../constants';
-import { Header, TransformerStatSliderField } from '../../components';
+import { Header, TransformerStatSliderField, ErrorMessage } from '../../components';
 import TransformerAPI from '../../api/TransformerAPI';
 
 class TransformerCreate extends Component {
@@ -63,7 +63,7 @@ class TransformerCreate extends Component {
       <div>
         <Header />
         <h2>Build a Transformer</h2>
-        {error && <div>Error: {error.message}</div>}
+        {error && <ErrorMessage message={error.message} />}
         <form onSubmit={handleCreate}>
           {``}
           <label htmlFor="name">Name</label>

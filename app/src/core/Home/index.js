@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 
+import styles from './styles/Home.module.css';
 import TransformerAPI from '../../api/TransformerAPI';
-import { Header } from '../../components';
+import { Header, ErrorMessage } from '../../components';
 import NavigationBar from './NavigationBar';
 import ContentLayout from './ContentLayout';
 import TransformerView from './TransformerView';
@@ -49,9 +50,8 @@ class Home extends Component {
         <NavigationBar />
         <main>
           <ContentLayout>
-            {error ? (
-              <div>{error.message}</div>
-            ) : isLoading ? (
+            {error && <ErrorMessage message={error.message} />}
+            {isLoading ? (
               <div>Loading...</div>
             ) : (
               <TransformerView autobots={autobots} decepticons={decepticons} />

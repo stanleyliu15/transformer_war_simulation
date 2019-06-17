@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import WarResults from './WarResults';
 import WarAPI from '../../api/WarAPI';
+import { ErrorMessage } from '../../components';
 
 class WarSimulation extends Component {
   state = {
@@ -25,7 +26,7 @@ class WarSimulation extends Component {
     const { war, isLoading, error } = this.state;
 
     if (error) {
-      return <div>{error.message}</div>;
+      return <ErrorMessage message={error.message} />;
     }
 
     if (isLoading) {
@@ -34,7 +35,6 @@ class WarSimulation extends Component {
 
     return (
       <div>
-        <h1>WAR</h1>
         <WarResults war={war} />
       </div>
     );

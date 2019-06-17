@@ -1,0 +1,12 @@
+.error_wrapper {
+  padding-left: 1rem;
+  padding-right: 1rem;
+  margin-bottom: 1rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.error_text {
+  color: red;
+  margin-top: 0;
+}

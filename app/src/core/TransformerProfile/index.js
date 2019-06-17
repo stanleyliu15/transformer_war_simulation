@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 
-import { Header } from '../../components';
+import { Header, ErrorMessage } from '../../components';
 import { allegiances } from '../../constants';
 import getTransformerStats from '../../util/getTransformerStats';
 import computeTransformerRating from '../../util/computeTransformerRating';
@@ -102,7 +102,7 @@ class TransformerProfile extends Component {
     return (
       <div>
         <Header />
-        {error && <div>Error: {error.message}</div>}
+        {error && <ErrorMessage message={error.message} />}
         {isLoading ? (
           <div>Loading...</div>
         ) : (
