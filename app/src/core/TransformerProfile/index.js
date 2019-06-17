@@ -91,7 +91,7 @@ class TransformerProfile extends Component {
       handleDeleteClicked,
       handleInputChange
     } = this;
-    const { transformer, inputs, isLoading, isEditing, message, deleted, error } = this.state;
+    const { transformer, inputs, isLoading, isEditing, deleted, error } = this.state;
     const transformerStats = getTransformerStats(transformer);
     const transformerRating = computeTransformerRating(transformer);
 
@@ -103,7 +103,6 @@ class TransformerProfile extends Component {
       <div>
         <Header />
         {error && <div>Error: {error.message}</div>}
-        {message && <div>{message}</div>}
         {isLoading ? (
           <div>Loading...</div>
         ) : (
