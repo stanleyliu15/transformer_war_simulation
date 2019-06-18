@@ -1,0 +1,20 @@
+.battler {
+  display: block;
+  text-align: center;
+  border: 1px solid lightgrey;
+  padding: 2rem;
+  color: black;
+  border-radius: 4px;
+}
+
+.battler:hover {
+  background-color: whitesmoke;
+}
+
+.battler_victor {
+  font-weight: bold;
+}
+
+.battler_loser {
+  opacity: 0.5;
+}

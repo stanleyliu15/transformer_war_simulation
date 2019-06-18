@@ -1,0 +1,26 @@
+.war_result_container {
+  height: 100vh;
+  padding: 2rem 3rem 2rem 3rem;
+}
+
+.war_result_header {
+  text-align: center;
+}
+
+.war_result_header_title {
+  display: inline-block;
+  border: 1px solid lightgray;
+  color: black;
+  font-size: 36px;
+  padding: 1rem 2rem 1rem 2rem;
+  margin-bottom: 1rem;
+  border-radius: 4px;
+}
+
+.war_result_header_title:hover {
+  background-color: whitesmoke;
+}
+
+.war_result_header_subtitle {
+  text-transform: capitalize;
+}
