@@ -4,7 +4,7 @@
   "description": "Transformers Server for purposes of the In-House front-end assignment.",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
+    "app": "cd app && npm run start",
     "start": "npm run compile && node dist/start-server.js",
     "pretty": "prettier --single-quote --write \"{src,test}/**/*.js\"",
     "compile": "npm run pretty && ./node_modules/.bin/babel src --out-dir dist"
@@ -39,7 +39,6 @@
     "@babel/core": "^7.4.5",
     "@babel/preset-env": "^7.4.5",
     "eslint": "^5.16.0",
-    "jest": "^24.8.0",
     "prettier": "^1.17.1"
   }
 }
