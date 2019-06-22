@@ -1,0 +1,25 @@
+.create_form_title_wrapper {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.create_button_wrapper {
+  margin-top: 1rem;
+}
+
+.create_button {
+  padding: 1rem 2rem 1rem 2rem;
+  font-size: 18px;
+  color: red;
+  background-color: transparent;
+  border: 3px solid red;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.create_button:hover {
+  color: white;
+  background-color: #ff0000c2;
+}

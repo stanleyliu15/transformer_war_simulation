@@ -1,0 +1,9 @@
+.save_button {
+  color: white;
+  border-color: blue;
+  background-color: blue;
+}
+
+.save_button:hover {
+  background-color: darkblue;
+}

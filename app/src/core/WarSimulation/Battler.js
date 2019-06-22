@@ -1,20 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
-import styles from './styles/Battler.module.css';
+import styles from './Battler.module.css';
 
 const Battler = ({ transformer, isVictor }) => {
   if (transformer === 'none') {
-    return <div className={styles.battler}>MIA</div>;
+    return <div className={`${styles.battler} ${styles.battler_loser}`} />;
   }
 
   return (
-    <a
+    <Link
       className={`${styles.battler} ${isVictor ? styles.battler_victor : styles.battler_loser}`}
-      href={`/transformers/profile/${transformer.id}`}
+      to={`/transformers/profile/${transformer.id}`}
     >
       {transformer.name}
-    </a>
+    </Link>
   );
 };
 Battler.propTypes = {

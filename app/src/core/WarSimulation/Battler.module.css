@@ -5,6 +5,7 @@
   padding: 2rem;
   color: black;
   border-radius: 4px;
+  margin: 0.5rem;
 }
 
 .battler:hover {
@@ -17,4 +18,5 @@
 
 .battler_loser {
   opacity: 0.5;
+  background-color: whitesmoke;
 }

@@ -1,0 +1,32 @@
+.allegiance_field_input_container {
+  display: flex;
+}
+
+.allegiance_input_wrapper {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid transparent;
+}
+
+.allegiance_input {
+  cursor: pointer;
+  width: 80px;
+  height: auto;
+  padding: 0.75rem;
+  background-color: transparent;
+}
+
+.allegiance_input_active {
+  background-color: whitesmoke;
+  border-color: lightgrey;
+}
+
+.allegiance_input:active {
+  background-color: whitesmoke;
+}
+
+.allegiance_input:focus {
+  outline: 1px solid lightgrey;
+}

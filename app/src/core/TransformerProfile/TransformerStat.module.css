@@ -1,0 +1,8 @@
+.stat_label_container {
+  margin-bottom: 0.5rem;
+}
+
+.stat_name {
+  margin-left: 0.25rem;
+  text-transform: capitalize;
+}

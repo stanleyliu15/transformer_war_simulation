@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import styles from './styles/TransformerView.module.css';
+import styles from './HomeView.module.css';
 import TransformerList from './TransformerList';
 import autobotLogo from '../../images/autobotLogo.png';
 import decepticonLogo from '../../images/decepticonLogo.png';
 
-const TransformerView = ({ autobots, decepticons }) => (
-  <div className={styles.transformer_view_container}>
+const HomeView = ({ autobots, decepticons }) => (
+  <div className={styles.home_view_container}>
     <div className={styles.transformer_list_wrapper}>
       <TransformerList allegianceLogoUri={autobotLogo} transformers={autobots} />
     </div>
@@ -17,9 +17,9 @@ const TransformerView = ({ autobots, decepticons }) => (
   </div>
 );
 
-TransformerView.propTypes = {
+HomeView.propTypes = {
   autobots: PropTypes.arrayOf(PropTypes.object).isRequired,
   decepticons: PropTypes.arrayOf(PropTypes.object).isRequired
 };
 
-export default TransformerView;
+export default HomeView;

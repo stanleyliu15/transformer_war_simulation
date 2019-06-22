@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 
-import { Header, ErrorMessage } from '../../components';
-import { allegiances } from '../../constants';
+import { Header, ErrorMessage, LoadingSpinner } from '../../components';
 import getTransformerStats from '../../util/getTransformerStats';
 import computeTransformerRating from '../../util/computeTransformerRating';
-import TransformerStatList from './TransformerStatList';
-import TransformerStatSliderFieldList from './TransformerStatSliderFieldList';
 import TransformerAPI from '../../api/TransformerAPI';
+import EditingProfileView from './EditingProfileView';
+import ProfileView from './ProfileView';
 
 class TransformerProfile extends Component {
   state = {
@@ -32,6 +31,8 @@ class TransformerProfile extends Component {
   }
 
   handleInputChange = event => {
+    event.preventDefault();
+
     const { name: inputName } = event.target;
     let { value: inputValue } = event.target;
     const { inputs } = this.state;
@@ -49,28 +50,32 @@ class TransformerProfile extends Component {
     this.setState({ isEditing: !this.state.isEditing });
   };
 
-  handleEditSave = _ => {
+  handleEditSave = event => {
+    event.preventDefault();
+
     const { id } = this.props.match.params;
     const { transformer, inputs } = this.state;
     const update = { ...transformer, ...inputs };
 
     if (transformer.rank > 7) {
-      this.setState({ error: Error('*Cannot update a transformer with higher than 8 rank') });
+      this.setState({ error: Error('*Cannot update a transformer with higher than a rank of 8') });
+    } else {
+      this.setState({ isLoading: true });
+      TransformerAPI.putTransformer(id, update)
+        .then(_ => {
+          TransformerAPI.getTransformer(id)
+            .then(transformer => {
+              this.setState({ isLoading: false, transformer, inputs: {}, isEditing: false });
+            })
+            .catch(error => this.setState({ isLoading: false, isEditing: false, error }));
+        })
+        .catch(error => this.setState({ isLoading: false, isEditing: false, error }));
     }
-
-    this.setState({ isLoading: true });
-    TransformerAPI.putTransformer(id, update)
-      .then(_ => {
-        TransformerAPI.getTransformer(id)
-          .then(transformer => {
-            this.setState({ isLoading: false, transformer, inputs: {}, isEditing: false });
-          })
-          .catch(error => this.setState({ isLoading: false, isEditing: false, error }));
-      })
-      .catch(error => this.setState({ isLoading: false, isEditing: false, error }));
   };
 
-  handleEditCancel = _ => {
+  handleEditCancel = event => {
+    event.preventDefault();
+
     this.setState({ isEditing: false, inputs: {} });
   };
 
@@ -92,6 +97,9 @@ class TransformerProfile extends Component {
       handleInputChange
     } = this;
     const { transformer, inputs, isLoading, isEditing, deleted, error } = this.state;
+    const { name, allegiance, ...transformerStatInputs } = inputs;
+    const nameInput = name === undefined ? transformer.name : name;
+    const allegianceInput = allegiance === undefined ? transformer.allegiance : allegiance;
     const transformerStats = getTransformerStats(transformer);
     const transformerRating = computeTransformerRating(transformer);
 
@@ -100,81 +108,36 @@ class TransformerProfile extends Component {
     }
 
     return (
-      <div>
+      <>
         <Header />
         {error && <ErrorMessage message={error.message} />}
         {isLoading ? (
-          <div>Loading...</div>
+          <LoadingSpinner />
         ) : (
-          <div>
-            <div>
-              <div>
-                {isEditing ? (
-                  <input
-                    name="name"
-                    type="text"
-                    value={inputs.name === undefined ? transformer.name : inputs.name}
-                    onChange={handleInputChange}
-                  />
-                ) : (
-                  <h2>{transformer.name}</h2>
-                )}
-              </div>
-              <div>
-                <h3>Allegiance</h3>
-                {isEditing ? (
-                  <div>
-                    {allegiances.map(allegiance => (
-                      <input
-                        key={allegiance}
-                        name="allegiance"
-                        type="button"
-                        value={allegiance}
-                        onClick={handleInputChange}
-                      />
-                    ))}
-                  </div>
-                ) : (
-                  <h4>{transformer.allegiance}</h4>
-                )}
-              </div>
-              <div>
-                {isEditing ? (
-                  <>
-                    <button onClick={handleEditSave}>Save Changes</button>
-                    <button onClick={handleEditCancel}>Cancel</button>
-                  </>
-                ) : (
-                  <>
-                    <button onClick={handleEditClicked}>Edit</button>
-                    <button onClick={handleDeleteClicked}>Delete</button>
-                  </>
-                )}
-              </div>
-            </div>
-            <div>
-              <div>
-                <h6>Stats</h6>
-                <div>
-                  {isEditing ? (
-                    <TransformerStatSliderFieldList
-                      inputs={inputs}
-                      onInputChange={handleInputChange}
-                      transformerStats={transformerStats}
-                    />
-                  ) : (
-                    <TransformerStatList
-                      transformerRating={transformerRating}
-                      transformerStats={transformerStats}
-                    />
-                  )}
-                </div>
-              </div>
-              <div />
-            </div>
-          </div>
+          <>
+            {isEditing ? (
+              <EditingProfileView
+                onSave={handleEditSave}
+                onCancel={handleEditCancel}
+                onInputChange={handleInputChange}
+                nameInput={nameInput}
+                allegianceInput={allegianceInput}
+                transformerStats={transformerStats}
+                transformerStatInputs={transformerStatInputs}
+              />
+            ) : (
+              <ProfileView
+                onEdit={handleEditClicked}
+                onDelete={handleDeleteClicked}
+                transformerName={transformer.name}
+                transformerAllegiance={transformer.allegiance}
+                transformerRating={transformerRating}
+                transformerStats={transformerStats}
+              />
+            )}
+          </>
         )}
-      </div>
+      </>
     );
   }
 }

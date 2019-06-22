@@ -1,0 +1,15 @@
+.transformer_list_container {
+  text-align: center;
+}
+
+.transformer_list_allegiance_logo_wrapper {
+  width: 60px;
+  height: 60px;
+  margin: 0 auto;
+  margin-bottom: 1rem;
+}
+
+.transformer_list_allegiance_logo {
+  width: 100%;
+  height: 100%;
+}

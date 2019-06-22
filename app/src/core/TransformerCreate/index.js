@@ -2,8 +2,16 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 
 import { allegiances } from '../../constants';
-import { Header, TransformerStatSliderField, ErrorMessage } from '../../components';
+import {
+  Header,
+  ErrorMessage,
+  TransformerStatsSliderFormFieldList,
+  TextFormField,
+  AllegianceFormField
+} from '../../components';
 import TransformerAPI from '../../api/TransformerAPI';
+import styles from './Index.module.css';
+import common_styles from '../../CommonStyles.module.css';
 
 class TransformerCreate extends Component {
   state = {
@@ -23,7 +31,9 @@ class TransformerCreate extends Component {
     error: null
   };
 
-  onInputChange = event => {
+  handleInputChange = event => {
+    event.preventDefault();
+
     const { name: inputName } = event.target;
     let { value: inputValue } = event.target;
     const { inputs } = this.state;
@@ -50,7 +60,7 @@ class TransformerCreate extends Component {
   };
 
   render() {
-    const { onInputChange, handleCreate } = this;
+    const { handleInputChange, handleCreate } = this;
     const { created, error } = this.state;
     const { inputs } = this.state;
     const { name: nameInput, allegiance: allegianceInput, ...transformerStatInputs } = inputs;
@@ -60,44 +70,24 @@ class TransformerCreate extends Component {
     }
 
     return (
-      <div>
+      <>
         <Header />
-        <h2>Build a Transformer</h2>
+        <div className={styles.create_form_title_wrapper}>
+          <h2>Build a Transformer</h2>
+        </div>
         {error && <ErrorMessage message={error.message} />}
-        <form onSubmit={handleCreate}>
-          {``}
-          <label htmlFor="name">Name</label>
-          <div>
-            <input name="name" type="text" value={nameInput} onChange={onInputChange} />
-          </div>
-          {``}
-          <label htmlFor="allegiance">Allegiance</label>
-          <div>
-            {allegiances.map(allegiance => (
-              <input
-                key={allegiance}
-                name="allegiance"
-                type="button"
-                value={allegiance}
-                onClick={onInputChange}
-              />
-            ))}
-          </div>
-          {``}
-          {Object.keys(transformerStatInputs).map(statInputKey => (
-            <TransformerStatSliderField
-              key={statInputKey}
-              name={statInputKey}
-              value={transformerStatInputs[statInputKey]}
-              onChange={onInputChange}
-            />
-          ))}
-          {``}
-          <div>
-            <input type="submit" value="Create" />
+        <form className={common_styles.form_fields_container} onSubmit={handleCreate}>
+          <TextFormField name="name" value={nameInput} onInputChange={handleInputChange} />
+          <AllegianceFormField value={allegianceInput} onInputChange={handleInputChange} />
+          <TransformerStatsSliderFormFieldList
+            statInputs={transformerStatInputs}
+            onInputChange={handleInputChange}
+          />
+          <div className={styles.create_button_wrapper}>
+            <input className={styles.create_button} type="submit" value="Create" />
           </div>
         </form>
-      </div>
+      </>
     );
   }
 }

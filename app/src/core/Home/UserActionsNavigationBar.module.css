@@ -1,0 +1,46 @@
+.navigation_bar_container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding: 1rem;
+}
+
+.navigation_bar_container::before {
+  content: 'Create Transformer';
+  visibility: hidden;
+  border-width: 1px;
+  border-style: solid;
+  padding: 1rem 2rem 1rem 2rem;
+}
+
+.navigation_item {
+  text-align: center;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 4px;
+  padding: 1rem 2rem 1rem 2rem;
+}
+
+.navigation_item:active {
+  position: relative;
+  top: 2px;
+}
+
+.war_link {
+  color: white;
+  background-color: red;
+  border-color: red;
+}
+
+.war_link:hover {
+  background-color: #bf2a2a;
+}
+
+.create_link {
+  color: black;
+  border-color: lightgray;
+}
+
+.create_link:hover {
+  background-color: whitesmoke;
+}

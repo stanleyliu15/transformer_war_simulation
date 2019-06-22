@@ -1,43 +1,39 @@
 import React, { Component } from 'react';
 
-import WarResults from './WarResults';
 import WarAPI from '../../api/WarAPI';
-import { ErrorMessage } from '../../components';
+import WarResults from './WarResults';
+import { ErrorMessage, LoadingSpinner } from '../../components';
 
 class WarSimulation extends Component {
   state = {
-    war: {},
+    warData: {},
     isLoading: true,
     error: null
   };
 
   componentDidMount() {
     WarAPI.getWar()
-      .then(war => {
+      .then(warData => {
         this.setState({
-          isLoading: false,
-          war
+          warData,
+          isLoading: false
         });
       })
       .catch(error => this.setState({ isLoading: false, error }));
   }
 
   render() {
-    const { war, isLoading, error } = this.state;
+    const { warData, isLoading, error } = this.state;
 
     if (error) {
       return <ErrorMessage message={error.message} />;
     }
 
     if (isLoading) {
-      return <div>Loading...</div>;
+      return <LoadingSpinner />;
+    } else {
+      return <WarResults warData={warData} />;
     }
-
-    return (
-      <div>
-        <WarResults war={war} />
-      </div>
-    );
   }
 }
 

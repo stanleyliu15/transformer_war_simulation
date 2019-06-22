@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
-import styles from './styles/TransformerList.module.css';
+import styles from './TransformerListItem.module.css';
 
 const TransformerListItem = ({ id, name, rating }) => (
   <li className={styles.transformer_item_wrapper}>

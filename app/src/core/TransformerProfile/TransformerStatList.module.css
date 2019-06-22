@@ -1,0 +1,23 @@
+.rating_container {
+  margin: 1rem;
+  text-align: center;
+  width: 150px;
+  margin: 1rem auto;
+}
+
+.rating_title {
+  margin-bottom: 1rem;
+}
+
+.stat_container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.stat_wrapper {
+  flex-basis: 25%;
+  text-align: center;
+  padding: 1.5rem;
+}

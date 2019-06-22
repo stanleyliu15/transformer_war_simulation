@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 
 import TransformerAPI from '../../api/TransformerAPI';
-import { Header, ErrorMessage } from '../../components';
-import NavigationBar from './NavigationBar';
-import TransformerView from './TransformerView';
+import { Header, ErrorMessage, LoadingSpinner } from '../../components';
+import UserActionsNavigationBar from './UserActionsNavigationBar';
+import HomeView from './HomeView';
 import sortObjectArrayAlphabetical from '../../util/sortObjectArrayAlphabetical';
 
 class Home extends Component {
@@ -43,18 +43,18 @@ class Home extends Component {
       data: { autobots, decepticons }
     } = this.state;
     return (
-      <div>
+      <>
         <Header />
-        <NavigationBar />
+        <UserActionsNavigationBar />
         <main>
           {error && <ErrorMessage message={error.message} />}
           {isLoading ? (
-            <div>Loading...</div>
+            <LoadingSpinner />
           ) : (
-            <TransformerView autobots={autobots} decepticons={decepticons} />
+            <HomeView autobots={autobots} decepticons={decepticons} />
           )}
         </main>
-      </div>
+      </>
     );
   }
 }
