@@ -1,5 +1,16 @@
 # In-House Transformers Server: The Front-End Take-Home assignment of Front-End Take-Home assignments
 
+## Configuration 
+```
+npm install
+npm run start
+
+(In a new terminal)
+cd app
+npm install
+npm run start
+```
+
 ## Preamble
 We know take-home tests are lame and we greatly appreciate you doing this; we’ve tried to
 structure this one so that it’s
